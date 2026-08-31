@@ -360,19 +360,31 @@ footer{max-width:560px;margin:0 auto;padding:8px 16px 30px;text-align:center;fon
       <label>地元</label><input type="text" id="f_area" maxlength="20" placeholder="例）渋谷">
       <label>しごと</label><input type="text" id="f_job" maxlength="24" placeholder="例）会社経営">
       <label>無敵タイプ<span class="opt">診断すると自動で入ります</span></label><input type="text" id="f_type" maxlength="24" placeholder="例）応援団長タイプ">
+      <label>MBTI<span class="opt">わからなければ空欄でOK</span></label><input type="text" id="f_mbti" maxlength="20" placeholder="例）ENFP">
       <label>チャームポイント</label><input type="text" id="f_charm" maxlength="24" placeholder="例）笑い声">
       <div class="sec"><h3>Personality</h3></div>
       <label>座右の銘</label><input type="text" id="f_motto" maxlength="30" placeholder="例）笑う門には福来る">
       <label>子どもの頃の夢</label><input type="text" id="f_dream" maxlength="24" placeholder="例）お花屋さん">
-      <label>最近ハマってること</label><input type="text" id="f_hobby" maxlength="30" placeholder="例）推し活">
-      <label>好きな食べもの</label><input type="text" id="f_food" maxlength="24" placeholder="例）いちご大福">
+      <label>子どもの頃の特技</label><input type="text" id="f_tokugi" maxlength="30" placeholder="例）一輪車・あやとり">
+      <label>趣味</label><input type="text" id="f_hobby" maxlength="30" placeholder="例）カフェ巡り">
+      <label>最近ハマってること</label><input type="text" id="f_hamari" maxlength="30" placeholder="例）フリマ出品">
       <label>休日の過ごし方</label><input type="text" id="f_holiday" maxlength="30" placeholder="例）子どもと公園">
+      <div class="sec"><h3>スキなもの</h3><p style="font-size:12px;color:#a08d7d;">同じ「スキ」の人と、つながるきっかけに。</p></div>
+      <label>推し<span class="opt">人・グループ・キャラ何でも</span></label><input type="text" id="f_oshi" maxlength="30" placeholder="例）2000年代の青春パンク">
+      <label>好きなドラマ</label><input type="text" id="f_drama" maxlength="30" placeholder="例）ごくせん">
+      <label>好きなアニメ・マンガ</label><input type="text" id="f_anime" maxlength="30" placeholder="例）NANA・GALS!">
       <label>カラオケの十八番</label><input type="text" id="f_song" maxlength="30" placeholder="例）あの頃の名曲">
+      <label>好きな食べもの</label><input type="text" id="f_food" maxlength="24" placeholder="例）いちご大福">
+      <label>好きな飲み物</label><input type="text" id="f_drink" maxlength="24" placeholder="例）タピオカ・レモンサワー">
       <div class="sec"><h3>放課後 Talk</h3></div>
       <label>放課後、どこ派だった？</label><input type="text" id="f_after" maxlength="30" placeholder="例）ゲーセン→プリクラ">
       <label>あの頃の必需品</label><input type="text" id="f_item" maxlength="30" placeholder="例）カラーペン10色">
+      <label>平成でいちばん戻りたい年</label><input type="text" id="f_year" maxlength="24" placeholder="例）2003年（高2の夏）">
       <label>いま一番ほしいもの</label><input type="text" id="f_want" maxlength="30" placeholder="例）自分の時間">
       <label>フェスで楽しみなこと</label><input type="text" id="f_fes" maxlength="30" placeholder="例）制服でプリクラ">
+      <label>フェスで一緒にやりたいこと</label><input type="text" id="f_yaritai" maxlength="30" placeholder="例）プリクラ→フリマ巡り">
+      <div class="sec"><h3>つながり</h3></div>
+      <label>こんな人、声かけて！</label><input type="text" id="f_koe" maxlength="40" placeholder="例）同世代ママ・NANA好き・世田谷の人">
       <label>ひとこと</label><input type="text" id="f_msg" maxlength="40" placeholder="例）なかよくしてね">
       <button class="btn" id="btnToDeco">プロフ帳にする → デコる</button>
       <button class="btn gray sm" id="btnSample">見本を見る</button>
@@ -452,7 +464,7 @@ footer{max-width:560px;margin:0 auto;padding:8px 16px 30px;text-align:center;fon
   </section>
 
 </div>
-<footer>放課後最強フェス「生徒手帳」 v20260831b</footer>
+<footer>放課後最強フェス「生徒手帳」 v20260831c</footer>
 </div>
 
 <!-- タブバー -->
@@ -479,7 +491,7 @@ footer{max-width:560px;margin:0 auto;padding:8px 16px 30px;text-align:center;fon
 <script>
 (function(){
 "use strict";
-var VER='20260831b';
+var VER='20260831c';
 var SB_URL='https://inrvprlyobghviklulcv.supabase.co';
 var SB_KEY='sb_publishable_ZrCNcsRHMci-l7Fns8QtIA_X22XZGJp';
 var P; try{ P=new URLSearchParams(location.search); }catch(e){ P={get:function(){return null;}}; }
@@ -841,7 +853,7 @@ var BGS=[
   {id:'pool',n:'プール'},{id:'gingham',n:'ピンク'},{id:'note',n:'ノート'},
   {id:'kokuban',n:'黒板'},{id:'lame',n:'ラメ'},{id:'milk',n:'水玉'}
 ];
-var FIELD_IDS=['nm','aka','area','job','type','charm','motto','dream','hobby','food','holiday','song','after','item','want','fes','msg'];
+var FIELD_IDS=['nm','aka','area','job','type','mbti','charm','motto','dream','tokugi','hobby','hamari','holiday','oshi','drama','anime','song','food','drink','after','item','year','want','fes','yaritai','koe','msg'];
 var prof=load('st_prof',true)||{v:1,f:{},deco:{bg:'pool',stk:[]}};
 if(!prof.deco) prof.deco={bg:'pool',stk:[]};
 var profKey=load('st_prof_key')||'';
@@ -857,9 +869,11 @@ function fillForm(){
   if(!$('f_nm').value){ var nm=load('st_name'); if(nm) $('f_nm').value=nm; }
 }
 var PF_SECTIONS=[
-  {h:null,rows:[['aka','a.k.a'],['area','地元'],['job','しごと'],['type','無敵タイプ'],['charm','チャームポイント']]},
-  {h:'Personality',rows:[['motto','座右の銘'],['dream','子どもの頃の夢'],['hobby','最近ハマってること'],['food','好きな食べもの'],['holiday','休日の過ごし方'],['song','カラオケの十八番']]},
-  {h:'放課後 Talk',rows:[['after','放課後どこ派？'],['item','あの頃の必需品'],['want','いま一番ほしいもの'],['fes','フェスで楽しみなこと']]}
+  {h:null,rows:[['aka','a.k.a'],['area','地元'],['job','しごと'],['type','無敵タイプ'],['mbti','MBTI'],['charm','チャームポイント']]},
+  {h:'Personality',rows:[['motto','座右の銘'],['dream','子どもの頃の夢'],['tokugi','子どもの頃の特技'],['hobby','趣味'],['hamari','最近ハマってること'],['holiday','休日の過ごし方']]},
+  {h:'スキなもの',rows:[['oshi','推し'],['drama','好きなドラマ'],['anime','好きなアニメ・マンガ'],['song','カラオケの十八番'],['food','好きな食べもの'],['drink','好きな飲み物']]},
+  {h:'放課後 Talk',rows:[['after','放課後どこ派？'],['item','あの頃の必需品'],['year','平成でいちばん戻りたい年'],['want','いま一番ほしいもの'],['fes','フェスで楽しみなこと'],['yaritai','フェスで一緒にやりたいこと']]},
+  {h:'つながり',w2:true,rows:[['koe','こんな人、声かけて！'],['msg','ひとこと']]}
 ];
 function renderProfCard(el,p){
   var f=p.f||{};
@@ -873,17 +887,13 @@ function renderProfCard(el,p){
   html+='</div></div>';
   PF_SECTIONS.forEach(function(sec){
     var rows=sec.rows.filter(function(r){ return f[r[0]]; });
-    if(sec.h==null){
-      if(rows.length){ html+='<div class="pf-grid" style="margin-top:8px;">'+rows.map(function(r){
-        return '<div class="pf-field"><div class="pf-k">'+esc(r[1])+'</div><div class="pf-v">'+esc(f[r[0]])+'</div></div>';
-      }).join('')+'</div>'; }
-    }else if(rows.length){
-      html+='<div class="pf-h">'+esc(sec.h)+'</div><div class="pf-grid">'+rows.map(function(r){
-        return '<div class="pf-field"><div class="pf-k">'+esc(r[1])+'</div><div class="pf-v">'+esc(f[r[0]])+'</div></div>';
-      }).join('')+'</div>';
-    }
+    if(!rows.length) return;
+    var cells=rows.map(function(r){
+      return '<div class="pf-field'+(sec.w2?' w2':'')+'"><div class="pf-k">'+esc(r[1])+'</div><div class="pf-v">'+esc(f[r[0]])+'</div></div>';
+    }).join('');
+    if(sec.h==null){ html+='<div class="pf-grid" style="margin-top:8px;">'+cells+'</div>'; }
+    else{ html+='<div class="pf-h">'+esc(sec.h)+'</div><div class="pf-grid">'+cells+'</div>'; }
   });
-  if(f.msg){ html+='<div class="pf-h">ひとこと</div><div class="pf-grid"><div class="pf-field w2"><div class="pf-v" style="border:none;">'+esc(f.msg)+'</div></div></div>'; }
   el.className='profcard bg-'+((p.deco&&p.deco.bg)||'pool');
   el.innerHTML=html;
 }
@@ -994,9 +1004,11 @@ $('btnBackForm').onclick=function(){
   try{ window.scrollTo(0,0); }catch(e){}
 };
 $('btnSample').onclick=function(){
-  prof={v:1,f:{nm:'みちこ',aka:'みっちー',area:'世田谷',job:'販売のおしごと',type:'ムードメーカータイプ',charm:'えくぼ',
-    motto:'笑う門には福来る',dream:'お花屋さん',hobby:'推し活とフリマ出品',food:'いちご大福',holiday:'子どもと公園→夜はドラマ',song:'2003年の名バラード',
-    after:'ゲーセン→プリ帳交換',item:'カラーペン10色',want:'自分だけの時間',fes:'制服でプリクラ！',msg:'なかよくしてね'},
+  prof={v:1,f:{nm:'みちこ',aka:'みっちー',area:'世田谷',job:'販売のおしごと',type:'ムードメーカータイプ',mbti:'ENFP',charm:'えくぼ',
+    motto:'笑う門には福来る',dream:'お花屋さん',tokugi:'一輪車とあやとり',hobby:'カフェ巡り',hamari:'推し活とフリマ出品',holiday:'子どもと公園→夜はドラマ',
+    oshi:'2000年代の青春パンク',drama:'ごくせん',anime:'NANA・GALS!',song:'2003年の名バラード',food:'いちご大福',drink:'タピオカ',
+    after:'ゲーセン→プリ帳交換',item:'カラーペン10色',year:'2003年（高2の夏）',want:'自分だけの時間',fes:'制服でプリクラ！',yaritai:'プリクラ→フリマ巡り',
+    koe:'同世代ママさん・NANA好きさん、話しましょ！',msg:'なかよくしてね'},
     deco:{bg:'pool',stk:[
       {id:'sm1',t:'heartP',x:88,y:6,r:-14,sc:1.1},{id:'sm2',t:'star',x:8,y:44,r:12,sc:.9},
       {id:'sm3',t:'hibiscus',x:92,y:38,r:8,sc:1},{id:'sm4',t:'dolphin',x:10,y:74,r:-10,sc:1.1},
