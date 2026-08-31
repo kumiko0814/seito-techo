@@ -23,24 +23,11 @@ body{
 .paper{background-image:repeating-linear-gradient(transparent,transparent 31px,#f0dfd2 31px,#f0dfd2 32px);}
 .wrap{max-width:560px;margin:0 auto;padding:16px 14px 120px;}
 
-/* ===== 手帳表紙 ===== */
-#scrCover{min-height:100dvh;display:flex;align-items:center;justify-content:center;background:#225443;padding:24px;}
-.cover{
-  width:100%;max-width:360px;background:#1d3a4f;border-radius:14px;
-  border:3px solid #c9a86a;box-shadow:0 14px 40px rgba(0,0,0,.35), inset 0 0 0 6px #1d3a4f, inset 0 0 0 7px rgba(201,168,106,.5);
-  padding:48px 26px 38px;text-align:center;color:#e8d8b0;
-}
-.cover .crest{width:64px;height:64px;margin:0 auto 16px;border:2.5px solid #c9a86a;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:700;color:#e8d8b0;}
-.cover .sch{font-size:12px;letter-spacing:.35em;margin-bottom:8px;color:#cbb98c;}
-.cover h1{font-size:34px;letter-spacing:.28em;font-weight:600;margin:4px 0 2px;text-indent:.28em;}
-.cover .sub{font-size:12.5px;letter-spacing:.1em;color:#cbb98c;margin-top:6px;}
-.cover .fes{font-size:13px;margin-top:22px;line-height:1.9;color:#f2e6c8;}
-.cover .open{
-  margin-top:24px;display:inline-block;border:1.5px solid #c9a86a;border-radius:999px;
-  padding:13px 44px;font-size:15px;letter-spacing:.2em;color:#e8d8b0;background:transparent;cursor:pointer;font-family:inherit;
-}
-.cover .open:active{background:rgba(201,168,106,.15);}
+/* ===== 手帳表紙（くみこ支給の完成画像を1枚そのまま） ===== */
+#scrCover{min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:#22383a;padding:10px 10px 22px;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+#scrCover img{display:block;width:auto;max-width:100%;max-height:92dvh;object-fit:contain;}
+#coverHint{margin-top:10px;font-size:12.5px;letter-spacing:.24em;color:#c9b98a;opacity:.85;}
 
 /* ===== インデックスタブ（下部ナビ） ===== */
 #tabbar{position:fixed;left:0;right:0;bottom:0;z-index:8000;background:#1d3a4f;border-top:2px solid #c9a86a;
@@ -281,14 +268,8 @@ footer{max-width:560px;margin:0 auto;padding:8px 16px 30px;text-align:center;fon
 
 <!-- ===== 表紙 ===== -->
 <div id="scrCover">
-  <div class="cover">
-    <div class="crest">最</div>
-    <div class="sch">HOUKAGO SAIKYO FES</div>
-    <h1>生徒手帳</h1>
-    <div class="sub">放課後最強学園</div>
-    <div class="fes">おかえり、最強だった私。<br>学生証・無敵タイプ診断・プロフ帳。<br>あの頃の放課後が、ここにあります</div>
-    <button class="open" id="btnOpen">ひらく</button>
-  </div>
+  <img src="cover.jpg" alt="生徒手帳｜放課後最強学園">
+  <div id="coverHint">タップしてひらく</div>
 </div>
 
 <!-- ===== 本体 ===== -->
@@ -499,7 +480,7 @@ footer{max-width:560px;margin:0 auto;padding:8px 16px 30px;text-align:center;fon
   </section>
 
 </div>
-<footer>放課後最強フェス「生徒手帳」 v20260831f</footer>
+<footer>放課後最強フェス「生徒手帳」 v20260831g</footer>
 </div>
 
 <!-- タブバー -->
@@ -526,7 +507,7 @@ footer{max-width:560px;margin:0 auto;padding:8px 16px 30px;text-align:center;fon
 <script>
 (function(){
 "use strict";
-var VER='20260831f';
+var VER='20260831g';
 var SB_URL='https://inrvprlyobghviklulcv.supabase.co';
 var SB_KEY='sb_publishable_ZrCNcsRHMci-l7Fns8QtIA_X22XZGJp';
 var P; try{ P=new URLSearchParams(location.search); }catch(e){ P={get:function(){return null;}}; }
@@ -575,7 +556,7 @@ function openApp(startPg){
   $('tabbar').classList.remove('hide');
   go(startPg||'pgId');
 }
-$('btnOpen').onclick=function(){
+$('scrCover').onclick=function(){
   try{ openApp('pgId'); }
   catch(e){ dlog('open fail: '+e.message); }
   finally{ $('scrCover').style.display='none'; $('app').classList.remove('hide'); $('tabbar').classList.remove('hide'); }
