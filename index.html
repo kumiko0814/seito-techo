@@ -125,7 +125,7 @@ input:focus,textarea.tx:focus{border-bottom-color:#EC4B83;}
 .pimg{display:block;width:100%;height:auto;}
 .pimg-v{position:absolute;line-height:1.25;font-family:'Yomogi','Klee One',sans-serif;color:#3b3a44;
   font-size:1em;overflow:hidden;display:flex;align-items:center;word-break:break-all;text-align:left;}
-.pimg-photo{position:absolute;left:10.3%;top:3.3%;width:23.0%;height:12.3%;transform:rotate(-2deg);
+.pimg-photo{position:absolute;left:9.6%;top:6.4%;width:20.7%;height:9.0%;transform:rotate(-2deg);
   overflow:hidden;border-radius:2px;}
 .pimg-photo img{width:100%;height:100%;object-fit:cover;}
 /* かわいいボタン（リファレンス下部準拠） */
@@ -419,7 +419,7 @@ footer{max-width:560px;margin:0 auto;padding:8px 16px 30px;text-align:center;fon
   </section>
 
 </div>
-<footer>放課後最強フェス「生徒手帳」 v20260831j</footer>
+<footer>放課後最強フェス「生徒手帳」 v20260831k</footer>
 </div>
 
 <!-- タブバー -->
@@ -446,7 +446,7 @@ footer{max-width:560px;margin:0 auto;padding:8px 16px 30px;text-align:center;fon
 <script>
 (function(){
 "use strict";
-var VER='20260831j';
+var VER='20260831k';
 var SB_URL='https://inrvprlyobghviklulcv.supabase.co';
 var SB_KEY='sb_publishable_ZrCNcsRHMci-l7Fns8QtIA_X22XZGJp';
 var P; try{ P=new URLSearchParams(location.search); }catch(e){ P={get:function(){return null;}}; }
@@ -828,46 +828,46 @@ var PF_SECTIONS=[
 ];
 /* 記入値の座標（画像に対する% left,top,width,height） */
 var FIELD_POS={
-  nm:[39.33,13.34,39.33,3.07],
-  aka:[10.78,20.43,33.41,2.72],
-  area:[54.74,20.43,41.16,2.72],
-  type:[10.78,25.97,32.87,2.72],
-  job:[10.78,31.64,39.87,2.72],
-  mbti:[10.78,37.19,39.87,2.24],
-  charm:[55.82,37.19,40.09,2.24],
-  motto:[10.56,44.86,19.40,2.36],
-  dream:[40.09,44.86,23.71,2.36],
-  tokugi:[67.46,44.86,25.43,2.36],
-  hobby:[10.56,50.35,25.86,2.60],
-  hamari:[40.09,50.35,23.92,2.60],
-  holiday:[67.46,50.35,21.98,2.60],
-  oshi:[10.56,59.15,26.08,2.01],
-  drama:[40.09,59.15,23.92,2.01],
-  anime:[67.46,59.15,27.37,2.01],
-  song:[10.56,64.29,26.08,2.18],
-  food:[40.09,64.29,23.92,2.18],
-  drink:[67.46,64.29,19.61,2.18],
-  after:[10.78,72.14,27.16,2.36],
-  item:[54.74,72.14,24.46,2.36],
-  year:[10.78,77.45,39.87,2.36],
-  want:[54.74,77.45,30.39,2.36],
-  fes:[10.78,82.76,39.87,2.36],
-  yaritai:[54.74,82.76,28.45,2.36],
-  koe:[10.78,90.44,51.72,2.36],
-  msg:[14.01,96.40,31.25,2.66]
+  nm:[36.13,11.36,39.32,3.71],
+  aka:[10.84,18.66,32.20,2.27],
+  area:[53.35,18.66,37.51,2.27],
+  type:[10.84,24.22,32.20,2.51],
+  job:[10.84,30.02,38.58,2.57],
+  mbti:[10.10,35.59,39.32,2.39],
+  charm:[53.13,35.59,39.85,2.39],
+  motto:[10.41,44.98,19.13,2.57],
+  dream:[39.11,44.98,23.59,2.57],
+  tokugi:[66.42,44.98,26.57,2.57],
+  hobby:[10.41,51.14,24.65,2.39],
+  hamari:[39.11,51.14,23.59,2.39],
+  holiday:[66.42,51.14,22.00,2.39],
+  oshi:[10.41,60.71,24.65,2.69],
+  drama:[39.11,60.71,23.59,2.69],
+  anime:[66.42,60.71,26.57,2.69],
+  song:[10.41,65.97,24.65,1.91],
+  food:[39.11,65.97,23.59,1.91],
+  drink:[66.42,65.97,21.79,1.91],
+  after:[10.63,74.58,27.63,2.39],
+  item:[52.07,74.58,27.10,2.39],
+  year:[10.63,79.31,37.73,1.56],
+  want:[52.07,79.31,35.07,1.56],
+  fes:[10.63,83.61,37.73,1.61],
+  yaritai:[52.07,83.61,31.35,1.61],
+  koe:[11.16,90.79,50.48,1.91],
+  msg:[10.41,95.57,33.16,2.93]
 };
 var EDIT_CROP=1; /* 最終デザインは画像内ボタンなし＝クロップ不要 */
 function renderProfCard(el,p){
   var f=p.f||{};
   var photo=p.photo||load('st_photo');
-  var html='<div class="pimg-wrap"><img class="pimg" src="profbg.jpg?v=20260831i" alt="プロフ帳">';
+  var html='<div class="pimg-wrap"><img class="pimg" src="profbg.jpg?v=20260831k" alt="プロフ帳">';
   if(photo){ html+='<div class="pimg-photo"><img alt="プロフ写真" src="'+photo+'"></div>'; }
   Object.keys(FIELD_POS).forEach(function(k){
     var v=f[k]; if(!v) return;
     var c=FIELD_POS[k];
     var L=String(v).length;
     /* 箱の幅×高さから収まるフォントサイズ(em)を自動計算（全角1文字≒1em想定） */
-    var boxW=c[2]*0.3333, boxH=c[3]*0.6085+0.2;
+    var boxW=c[2]*0.3333, boxH=c[3]*0.5924+0.2;
     var size=0.47;
     var cand=[1,.84,.7,.58,.47];
     for(var i=0;i<cand.length;i++){
