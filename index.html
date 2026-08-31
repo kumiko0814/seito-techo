@@ -156,9 +156,10 @@ input:focus,textarea.tx:focus{border-bottom-color:#EC4B83;}
 .pfx-gem{position:absolute;pointer-events:none;z-index:0;line-height:0;}
 .pfx-char{position:absolute;pointer-events:none;z-index:0;
   filter:drop-shadow(0 2px 3px rgba(160,60,105,.28));}
-.pfx-char.top{right:0;top:2px;width:86px;}
+.pfx-char.top{right:0;top:2px;width:96px;}
 .pfx-foot{display:flex;align-items:flex-end;justify-content:flex-end;gap:8px;margin-top:12px;min-height:8px;}
-.pfx-foot img{width:82px;filter:drop-shadow(0 2px 3px rgba(160,60,105,.28));}
+.pfx-foot img{width:150px;filter:drop-shadow(0 2px 3px rgba(160,60,105,.28));}
+.pfx-h .hic{height:40px;vertical-align:-13px;margin-left:7px;filter:drop-shadow(0 2px 2px rgba(160,60,105,.25));}
 .pfx-foot .fgems{display:flex;gap:6px;align-items:flex-end;padding-bottom:6px;}
 /* ぷっくりレインボー題字 */
 .pfx-title{font-family:'Mochiy Pop One','Klee One',sans-serif;font-size:30px;line-height:1.15;margin:0 0 12px;letter-spacing:.01em;}
@@ -183,7 +184,7 @@ input:focus,textarea.tx:focus{border-bottom-color:#EC4B83;}
 .sec-purple .pfx-k,.pfx-field.sec-purple .pfx-k{background:#b48ce0;box-shadow:0 1px 3px rgba(140,100,190,.35);}
 .pfx-v{font-family:'Yomogi','Klee One',sans-serif;font-size:15px;color:#33313b;line-height:1.5;min-height:1.45em;word-break:break-all;}
 /* ヘッダー（ポラロイド＋題字＋名前） */
-.pfx-head{display:flex;gap:12px;position:relative;padding-right:88px;min-height:176px;}
+.pfx-head{display:flex;gap:12px;position:relative;padding-right:92px;min-height:162px;}
 .pfx-pol{width:92px;flex:none;background:#fff;padding:6px 6px 16px;border-radius:4px;
   box-shadow:0 3px 9px rgba(180,80,120,.32);transform:rotate(-4deg);position:relative;margin-top:8px;align-self:flex-start;z-index:1;}
 .pfx-pol .tape{position:absolute;top:-9px;left:-13px;width:54px;height:20px;
@@ -204,8 +205,10 @@ input:focus,textarea.tx:focus{border-bottom-color:#EC4B83;}
   box-shadow:0 4px 0 #4187b8,0 7px 14px rgba(90,171,222,.35);}
 .btn.kawaii.bl:active{box-shadow:0 1px 0 #4187b8;}
 @media (max-width:380px){
-  .pfx-char.top{width:70px;}
-  .pfx-head{padding-right:70px;min-height:150px;}
+  .pfx-char.top{width:76px;}
+  .pfx-head{padding-right:74px;min-height:138px;}
+  .pfx-foot img{width:124px;}
+  .pfx-h .hic{height:32px;vertical-align:-10px;}
   .pfx-title{font-size:25px;}
   .pfx-k{font-size:9px;padding:1.5px 7px;}
 }
@@ -496,7 +499,7 @@ footer{max-width:560px;margin:0 auto;padding:8px 16px 30px;text-align:center;fon
   </section>
 
 </div>
-<footer>放課後最強フェス「生徒手帳」 v20260831d</footer>
+<footer>放課後最強フェス「生徒手帳」 v20260831e</footer>
 </div>
 
 <!-- タブバー -->
@@ -523,7 +526,7 @@ footer{max-width:560px;margin:0 auto;padding:8px 16px 30px;text-align:center;fon
 <script>
 (function(){
 "use strict";
-var VER='20260831d';
+var VER='20260831e';
 var SB_URL='https://inrvprlyobghviklulcv.supabase.co';
 var SB_KEY='sb_publishable_ZrCNcsRHMci-l7Fns8QtIA_X22XZGJp';
 var P; try{ P=new URLSearchParams(location.search); }catch(e){ P={get:function(){return null;}}; }
@@ -903,6 +906,8 @@ var PF_SECTIONS=[
   {h:'放課後Talk',color:'#6cb9e8',cls:'sec-blue',rows:[['after','放課後どこ派？'],['item','あの頃の必需品'],['year','平成で戻りたい年'],['want','いま一番ほしいもの'],['fes','フェスで楽しみなこと'],['yaritai','フェスで一緒にやりたいこと']]},
   {h:'つながり',color:'#b48ce0',cls:'sec-purple',rows:[['koe','こんな人、声かけて！',1],['msg','ひとこと',1]]}
 ];
+/* セクション見出し横の原画アイコン */
+var SEC_ICONS={'Personality':[['chars/bunny.png',46]],'放課後Talk':[['chars/game.png',40],['chars/camera.png',42]],'つながり':[['chars/ribbon.png',38]]};
 /* 題字（1文字ずつパステル） */
 var TITLE_LETTERS=[['M','#ff86c0'],['y','#7ecdf5'],[' ',''],['P','#ffd23e'],['r','#8fdc9a'],['o','#ff9fb0'],['f','#b79df0'],['i','#ffd23e'],['l','#7ecdf5'],['e','#ff86c0']];
 /* 宝石SVG（デザイン固定飾り） */
@@ -921,8 +926,8 @@ function renderProfCard(el,p){
   html+='<span class="pfx-gem" style="left:1.2%;top:62%;">'+gemDia(13)+'</span>';
   html+='<span class="pfx-gem" style="right:1.5%;top:70%;transform:rotate(12deg);">'+gemSpark(13,'#8fd6f2')+'</span>';
   html+='<span class="pfx-gem" style="left:2%;bottom:1.5%;transform:rotate(-10deg);">'+gemHeart(18,'#ffd23e','#e0a52a')+'</span>';
-  /* 公式キャラ（右上） */
-  html+='<img class="pfx-char top" src="chars/kumiko.png" alt="">';
+  /* 原画イラスト（右上：パンダの女の子） */
+  html+='<img class="pfx-char top" src="chars/girl.png" alt="">';
   /* ヘッダー：ポラロイド＋題字＋名前 */
   html+='<div class="pfx-head">';
   html+='<div class="pfx-pol"><div class="tape"></div><div class="ph">'
@@ -938,11 +943,14 @@ function renderProfCard(el,p){
     var cells=rows.map(function(r){
       return '<div class="pfx-field '+sec.cls+(r[2]?' w2':'')+'"><span class="pfx-k">'+esc(r[1])+'</span><div class="pfx-v">'+esc(f[r[0]])+'</div></div>';
     }).join('');
-    if(sec.h){ html+='<div class="pfx-h" style="color:'+sec.color+'">'+esc(sec.h)+' <span style="font-size:14px;">♡</span></div><div class="pfx-grid" style="margin-top:13px;">'+cells+'</div>'; }
+    if(sec.h){
+      var icons=(SEC_ICONS[sec.h]||[]).map(function(ic){ return '<img class="hic" style="height:'+ic[1]+'px" src="'+ic[0]+'" alt="">'; }).join('');
+      html+='<div class="pfx-h" style="color:'+sec.color+'">'+esc(sec.h)+' <span style="font-size:14px;">♡</span>'+icons+'</div><div class="pfx-grid" style="margin-top:13px;">'+cells+'</div>';
+    }
     else{ html+='<div class="pfx-grid">'+cells+'</div>'; }
   });
-  /* フッター：宝石＋公式キャラ（右下） */
-  html+='<div class="pfx-foot"><span class="fgems">'+gemHeart(15,'#ff7fb1','#e0568e')+gemDia(13)+'</span><img src="chars/haruka.png" alt=""></div>';
+  /* フッター：宝石＋原画イラスト（右下：双子） */
+  html+='<div class="pfx-foot"><span class="fgems">'+gemHeart(15,'#ff7fb1','#e0568e')+gemDia(13)+'</span><img src="chars/twins.png" alt=""></div>';
   html+='</div></div></div>';
   el.className='profcard';
   el.innerHTML=html;
