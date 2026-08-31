@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>生徒手帳｜無敵タイプ診断 — 放課後最強フェス</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Klee+One:wght@400;600&family=Yomogi&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  font-family:'Klee One','Hiragino Sans','Hiragino Kaku Gothic ProN','Yu Gothic Medium',-apple-system,BlinkMacSystemFont,sans-serif;
+  background:#FFF9F2;
+  color:#3a3330;
+  -webkit-text-size-adjust:100%;
+  -webkit-overflow-scrolling:touch;
+  line-height:1.8;
+}
+/* ノート罫線の紙 */
+.paper{
+  background-image:repeating-linear-gradient(transparent,transparent 31px,#f0dfd2 31px,#f0dfd2 32px);
+}
+.wrap{max-width:560px;margin:0 auto;padding:18px 16px 96px;}
+
+/* ===== 手帳表紙 ===== */
+#scrCover{min-height:100dvh;display:flex;align-items:center;justify-content:center;background:#225443;padding:24px;}
+.cover{
+  width:100%;max-width:360px;background:#1d3a4f;border-radius:14px;
+  border:3px solid #c9a86a;box-shadow:0 14px 40px rgba(0,0,0,.35), inset 0 0 0 6px #1d3a4f, inset 0 0 0 7px rgba(201,168,106,.5);
+  padding:52px 26px 40px;text-align:center;color:#e8d8b0;
+}
+.cover .crest{width:64px;height:64px;margin:0 auto 18px;border:2.5px solid #c9a86a;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:700;color:#e8d8b0;letter-spacing:0;}
+.cover .sch{font-size:12px;letter-spacing:.35em;margin-bottom:8px;color:#cbb98c;}
+.cover h1{font-size:34px;letter-spacing:.28em;font-weight:600;margin:4px 0 2px;text-indent:.28em;}
+.cover .sub{font-size:12.5px;letter-spacing:.1em;color:#cbb98c;margin-top:6px;}
+.cover .fes{font-size:13px;margin-top:26px;line-height:1.9;color:#f2e6c8;}
+.cover .open{
+  margin-top:26px;display:inline-block;border:1.5px solid #c9a86a;border-radius:999px;
+  padding:13px 44px;font-size:15px;letter-spacing:.2em;color:#e8d8b0;background:transparent;cursor:pointer;font-family:inherit;
+}
+.cover .open:active{background:rgba(201,168,106,.15);}
+
+/* ===== 共通カード ===== */
+.card{background:#fff;border-radius:4px 16px 16px 16px;padding:22px 20px;margin-top:16px;
+  border:1.5px solid #e9d9cb;box-shadow:2px 3px 0 rgba(213,186,160,.35);}
+.head{padding:10px 2px 0;}
+.head .tag{display:inline-block;background:#225443;color:#fff9f2;font-size:11.5px;letter-spacing:.18em;padding:4px 12px;border-radius:3px;}
+.head h2{font-size:21px;color:#3a3330;font-weight:600;margin-top:8px;letter-spacing:.04em;}
+.head .hsub{font-size:12.5px;color:#a08d7d;margin-top:2px;}
+.marker{background:linear-gradient(transparent 58%, #FFE44F 58%, #FFE44F 92%, transparent 92%);font-weight:600;}
+.note{font-size:12.5px;color:#a08d7d;margin-top:10px;}
+label{display:block;font-size:13px;font-weight:600;color:#3a3330;margin:14px 0 6px;}
+label .req{color:#EC4B83;font-size:11px;margin-left:6px;}
+label .opt{color:#b3a294;font-size:11px;margin-left:6px;}
+input[type=text],input[type=email]{
+  width:100%;border:none;border-bottom:2px solid #d9c6b5;background:transparent;
+  padding:10px 4px;font-size:16px;font-family:inherit;color:#3a3330;outline:none;border-radius:0;
+}
+input:focus{border-bottom-color:#EC4B83;}
+.btn{
+  display:block;width:100%;border:none;border-radius:999px;padding:15px;margin-top:20px;
+  font-size:15.5px;font-weight:600;color:#fff;cursor:pointer;font-family:inherit;letter-spacing:.06em;
+  background:#EC4B83;box-shadow:0 5px 0 #c2325f;
+}
+.btn:active{transform:translateY(3px);box-shadow:0 2px 0 #c2325f;}
+.btn.gray{background:#efe6dc;color:#5b4f46;box-shadow:0 5px 0 #d5c4b2;}
+.hide{display:none;}
+
+/* ===== 質問 ===== */
+.prog{margin-top:16px;}
+.prog .pt{display:flex;justify-content:space-between;font-size:12px;color:#a08d7d;font-weight:600;margin-bottom:5px;}
+.prog .pb{height:10px;background:#f2e7da;border-radius:999px;overflow:hidden;border:1px solid #e9d9cb;}
+.prog .pf{height:100%;background:linear-gradient(90deg,#EC4B83,#f38bab);border-radius:999px;transition:width .25s;}
+.qnum{display:inline-block;font-size:12px;color:#fff;font-weight:600;letter-spacing:.1em;background:#EC4B83;border-radius:3px;padding:2px 10px;margin-bottom:8px;}
+.qtext{font-size:17.5px;font-weight:600;color:#3a3330;min-height:64px;line-height:1.7;}
+.ansbtn{
+  display:block;width:100%;text-align:left;border:1.5px solid #e0cfbe;background:#fffdf9;color:#3a3330;
+  border-radius:12px;padding:13px 15px;margin-top:10px;font-size:14.5px;font-weight:500;cursor:pointer;font-family:inherit;line-height:1.6;
+}
+.ansbtn:active{background:#fdeef4;border-color:#EC4B83;}
+.backlink{display:inline-block;margin-top:16px;font-size:13px;color:#a08d7d;cursor:pointer;text-decoration:underline;}
+
+/* ===== 結果（生徒手帳 身分証ページ風） ===== */
+.idcard{background:#fff;border:2px solid #225443;border-radius:10px;overflow:hidden;margin-top:16px;box-shadow:2px 3px 0 rgba(213,186,160,.35);}
+.idcard .ihead{background:#225443;color:#fff9f2;font-size:12px;letter-spacing:.24em;text-align:center;padding:7px;}
+.idcard .ibody{padding:18px 18px 16px;}
+.idcard .iname{font-size:13px;color:#a08d7d;}
+.idcard .itype{font-size:27px;font-weight:600;margin-top:2px;line-height:1.4;}
+.idcard .ien{font-size:11px;color:#b3a294;letter-spacing:.2em;margin-top:2px;}
+.idcard .icatch{margin-top:12px;font-size:14.5px;font-weight:600;background:linear-gradient(transparent 55%, #FFE44F 55%, #FFE44F 92%, transparent 92%);display:inline;}
+.idrow{display:flex;gap:10px;margin-top:14px;}
+.idbox{flex:1;border:1.5px dashed #d9c6b5;border-radius:10px;padding:10px 12px;text-align:center;}
+.idbox .k{font-size:11px;color:#a08d7d;letter-spacing:.12em;}
+.idbox .v{font-size:16.5px;font-weight:600;color:#225443;margin-top:2px;}
+.stamp{position:relative;}
+.stamp:after{
+  content:"最強認定";position:absolute;right:10px;top:-6px;transform:rotate(-12deg);
+  border:2.5px solid #EC4B83;color:#EC4B83;border-radius:50%;font-size:12px;font-weight:600;
+  width:66px;height:66px;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.3;
+  opacity:.85;letter-spacing:.05em;
+}
+.bars{margin-top:16px;}
+.bar{margin-top:10px;}
+.bar .bl{display:flex;justify-content:space-between;font-size:13px;font-weight:600;color:#3a3330;margin-bottom:3px;}
+.bar .bl .pts{color:#a08d7d;font-weight:500;}
+.bar .bg{height:13px;background:#f2e7da;border-radius:999px;overflow:hidden;border:1px solid #e9d9cb;}
+.bar .bf{height:100%;border-radius:999px;width:0;transition:width .8s ease;}
+.sec{margin-top:18px;}
+.sec h3{font-size:13.5px;color:#EC4B83;font-weight:600;letter-spacing:.06em;border-bottom:2px solid #f7d3e0;padding-bottom:4px;margin-bottom:8px;}
+.sec ul{list-style:none;}
+.sec li{font-size:14px;padding-left:1.1em;position:relative;margin-top:5px;}
+.sec li:before{content:"・";position:absolute;left:0;color:#EC4B83;}
+.sec p{font-size:14px;}
+.fescta{background:#225443;border-radius:14px;padding:20px 18px;margin-top:20px;color:#fff9f2;text-align:center;}
+.fescta .t1{font-size:12px;letter-spacing:.2em;color:#c9dcc9;}
+.fescta .t2{font-size:17px;font-weight:600;margin-top:6px;line-height:1.7;}
+.fescta .t3{font-size:12.5px;margin-top:8px;color:#dcead9;}
+.savest{font-size:12.5px;text-align:center;margin-top:14px;color:#a08d7d;}
+.savest.ok{color:#3d7a5f;font-weight:600;}
+.savest.ng{color:#EC4B83;font-weight:600;background:#fdeef4;border-radius:10px;padding:10px;}
+footer{max-width:560px;margin:0 auto;padding:0 16px 28px;text-align:center;font-size:11px;color:#b3a294;}
+
+/* 不具合報告 */
+#bugL{position:fixed;right:14px;bottom:16px;background:#fff;border:1.5px solid #e0cfbe;color:#a08d7d;
+  font-size:12px;font-weight:600;border-radius:999px;padding:9px 14px;cursor:pointer;z-index:9000;
+  box-shadow:0 4px 12px rgba(90,60,40,.15);font-family:inherit;}
+#bugM{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(34,84,67,.5);z-index:9001;}
+#bugM.on{display:flex;align-items:center;justify-content:center;padding:20px;}
+#bugM .bx{background:#fff;border-radius:16px;padding:20px;max-width:420px;width:100%;}
+#bugM h3{font-size:15px;color:#3a3330;margin-bottom:10px;}
+#bugM textarea{width:100%;height:110px;border:1.5px solid #e0cfbe;border-radius:12px;padding:12px;font-size:15px;font-family:inherit;resize:none;outline:none;}
+#bugM .bb{display:flex;gap:8px;margin-top:12px;}
+#bugM button{flex:1;border:none;border-radius:999px;padding:11px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;}
+#bugM .s{background:#EC4B83;color:#fff;}
+#bugM .c{background:#efe6dc;color:#5b4f46;}
+#bugM .done{display:none;font-size:12.5px;color:#EC4B83;font-weight:600;margin-top:8px;text-align:center;}
+
+/* デバッグロガー */
+#dbg{display:none;position:fixed;left:0;right:0;bottom:0;max-height:32vh;overflow:auto;background:rgba(34,84,67,.94);
+  color:#e6f2e6;font-size:11px;font-family:Menlo,monospace;padding:8px 10px;z-index:99999;white-space:pre-wrap;}
+@media (max-width:380px){ .qtext{font-size:16px;} .cover h1{font-size:29px;} }
+</style>
+</head>
+<body>
+
+<!-- ===== 表紙 ===== -->
+<div id="scrCover">
+  <div class="cover">
+    <div class="crest">最</div>
+    <div class="sch">HOUKAGO SAIKYO FES</div>
+    <h1>生徒手帳</h1>
+    <div class="sub">放課後最強学園</div>
+    <div class="fes">おかえり、最強だった私。<br>まずは「無敵タイプ診断」で<br>あなたのクラスと部活が決まります</div>
+    <button class="open" id="btnOpen">ひらく</button>
+  </div>
+</div>
+
+<div id="app" class="paper hide">
+<div class="wrap">
+  <div class="head">
+    <span class="tag">転入手続き その1</span>
+    <h2>無敵タイプ診断</h2>
+    <div class="hsub">全12問・約1分｜直感で選ぶだけ</div>
+  </div>
+
+  <!-- 導入 -->
+  <div class="card" id="scrIntro">
+    <p style="font-size:14.5px;">あの頃、教室のどこにいた？<br><span class="marker">放課後のあなたの居場所</span>から、いまのあなたの「無敵タイプ」を診断します。結果に合わせて、フェス当日の<b>クラス</b>と<b>おすすめの部活</b>をお知らせします。</p>
+    <label>おなまえ（ニックネームOK）<span class="req">必須</span></label>
+    <input type="text" id="inName" placeholder="例）くみっち" maxlength="40" autocomplete="nickname">
+    <label>メールアドレス<span class="opt">任意・空欄でOK</span></label>
+    <input type="email" id="inMail" placeholder="例）xxxx@example.com" maxlength="80" autocomplete="email">
+    <button class="btn" id="btnStart">診断をはじめる</button>
+    <p class="note">回答はフェスのクラス分けの参考として記録されます。</p>
+  </div>
+
+  <!-- 質問 -->
+  <div class="card hide" id="scrQ">
+    <div class="prog">
+      <div class="pt"><span id="pNum">Q1 / 12</span><span id="pPct">0%</span></div>
+      <div class="pb"><div class="pf" id="pFill" style="width:3%"></div></div>
+    </div>
+    <div style="margin-top:16px;">
+      <div class="qnum" id="qNum">Q1</div>
+      <div class="qtext" id="qText"></div>
+    </div>
+    <div id="ansBox"></div>
+    <span class="backlink hide" id="btnBack">← 前の質問にもどる</span>
+  </div>
+
+  <!-- 結果 -->
+  <div class="hide" id="scrR">
+    <div class="idcard stamp">
+      <div class="ihead">身分証明書｜放課後最強学園</div>
+      <div class="ibody">
+        <div class="iname" id="rName"></div>
+        <div class="itype" id="rType"></div>
+        <div class="ien" id="rEn"></div>
+        <div><span class="icatch" id="rCatch"></span></div>
+        <div class="idrow">
+          <div class="idbox"><div class="k">クラス</div><div class="v" id="rClass"></div></div>
+          <div class="idbox"><div class="k">おすすめ部活</div><div class="v" id="rClub"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="bars" id="rBars"></div>
+      <div class="sec"><h3>あの頃のあなた</h3><ul id="rAno"></ul></div>
+      <div class="sec"><h3>いまも変わらない強み</h3><ul id="rTsuyo"></ul></div>
+      <div class="sec"><h3>無敵に戻るスイッチ</h3><p id="rSwitch"></p></div>
+      <div class="sec"><h3>フェス当日のおすすめの回り方</h3><p id="rMawari"></p></div>
+      <div class="sec"><h3>スコアの見方</h3><p>4つの点数は優劣ではなく「エネルギーの向きやすさ」。点差が小さい方は、場面に合わせて使い分けられるオールラウンダーです。</p></div>
+    </div>
+    <div class="fescta">
+      <div class="t1">2026.11 — 東京・飯田橋</div>
+      <div class="t2">放課後最強フェス<br>おかえり、最強だった私</div>
+      <div class="t3">学校一棟まるごと貸切。制服・購買・チャイム・卒業式。<br>診断結果を持って、登校してね。</div>
+    </div>
+    <div class="savest" id="saveSt">結果を記録しています…</div>
+    <button class="btn" id="btnCopy">結果をコピーする（LINE用）</button>
+    <button class="btn gray" id="btnRetry">もう一度診断する</button>
+  </div>
+</div>
+<footer>放課後最強フェス「生徒手帳」 v20260831a</footer>
+</div>
+
+<!-- 不具合報告 -->
+<div id="bugL">不具合を報告</div>
+<div id="bugM"><div class="bx">
+  <h3>不具合・気になったことを教えてください</h3>
+  <textarea id="bugT" placeholder="例）診断結果が表示されませんでした（iPhone/Safari）"></textarea>
+  <div class="bb"><button class="c" id="bugC">閉じる</button><button class="s" id="bugS">送信する</button></div>
+  <div class="done" id="bugD">届きました。ありがとうございます。すぐ確認します。</div>
+</div></div>
+
+<div id="dbg"></div>
+
+<script>
+(function(){
+"use strict";
+var VER='20260831a';
+var SB_URL='https://inrvprlyobghviklulcv.supabase.co';
+var SB_KEY='sb_publishable_ZrCNcsRHMci-l7Fns8QtIA_X22XZGJp';
+var P; try{ P=new URLSearchParams(location.search); }catch(e){ P={get:function(){return null;}}; }
+var CH=String(P.get('ch')||'fes').toLowerCase().replace(/[^a-z0-9_\-]/g,'')||'fes';
+var RUN_ID='muteki-'+CH;
+var DEMO=P.get('demo')==='1';
+var DEBUG=P.get('debug')==='1';
+var AUTO=P.get('auto')==='1';
+
+function dlog(m){
+  if(!DEBUG) return;
+  var d=document.getElementById('dbg'); d.style.display='block';
+  d.textContent+='['+new Date().toLocaleTimeString()+'] '+m+'\n';
+}
+window.onerror=function(msg,src,line){ dlog('ERROR: '+msg+' @'+line); return false; };
+dlog('boot v'+VER+' run_id='+RUN_ID+(DEMO?' demo':''));
+
+// ============ 質問（12問・4択＝各タイプ1択） ============
+// 各選択肢 t: d=団長(主導) m=ムードメーカー(促進) k=交換日記(支持) h=編集長(分析)
+var QS=[
+  {q:'文化祭の出し物決め。教室のあなたは？',a:[
+    {t:'d',x:'「決めよ！」と黒板の前に立って仕切る'},
+    {t:'m',x:'「メイド喫茶やろ！」と一番に盛り上げる'},
+    {t:'k',x:'もめてる子の間に入って、みんなの意見を聞く'},
+    {t:'h',x:'予算と準備日数を計算して、現実的な案を出す'}]},
+  {q:'放課後、まっすぐ帰らない日。どこにいた？',a:[
+    {t:'m',x:'ゲーセンかカラオケ。プリ撮って解散が定番'},
+    {t:'k',x:'友達の話を聞いてたら、いつの間にか暗くなってた'},
+    {t:'d',x:'部活か委員会。なんだかんだ仕切ってた'},
+    {t:'h',x:'図書室か本屋。ひとりの時間も好きだった'}]},
+  {q:'プリクラを撮るとき、あなたの役割は？',a:[
+    {t:'d',x:'「次このポーズ！」と流れを決める'},
+    {t:'m',x:'変顔担当。落書きも一番ハデに盛る'},
+    {t:'k',x:'端っこで笑ってる。でも全員分ちゃんと切って配る'},
+    {t:'h',x:'機種と料金をチェックして一番盛れる台を選ぶ'}]},
+  {q:'仲良しの子が廊下でヘコんでる。どうする？',a:[
+    {t:'k',x:'隣に座って、話し出すまでずっと待つ'},
+    {t:'m',x:'「甘いもん食べ行こ！」と連れ出す'},
+    {t:'d',x:'「よし、私がなんとかする」と動き出す'},
+    {t:'h',x:'原因を一緒に整理して、解決策を考える'}]},
+  {q:'Re:Re:Re:Re:…と続く夜のメール。あなたは？',a:[
+    {t:'m',x:'絵文字とデコメ全開。既読前に次を送っちゃう'},
+    {t:'k',x:'相手が寝るまで、ちゃんと返し続ける'},
+    {t:'h',x:'返す前に文面を読み返して、ちょっと推敲する'},
+    {t:'d',x:'長引いたら「電話しよ」と切り替える'}]},
+  {q:'席替えの日。内心どう思ってた？',a:[
+    {t:'d',x:'正直、どこでもやっていける自信があった'},
+    {t:'m',x:'「誰の隣でも盛り上げてみせる」とワクワク'},
+    {t:'k',x:'仲良しと離れるのがいちばん不安だった'},
+    {t:'h',x:'窓際・後ろの席の当たり確率を考えていた'}]},
+  {q:'テスト1週間前。あなたのスタイルは？',a:[
+    {t:'h',x:'計画表を作って、コツコツ仕上げる'},
+    {t:'d',x:'一夜漬けでも本番に強い。何とかする'},
+    {t:'k',x:'友達に教えてたら自分も覚えてた'},
+    {t:'m',x:'勉強会と称して集まる。半分おしゃべり'}]},
+  {q:'カラオケでマイクが回ってきた。どうする？',a:[
+    {t:'m',x:'立ち上がって熱唱。タンバリンも鳴らす'},
+    {t:'d',x:'十八番を堂々と。採点で勝ちにいく'},
+    {t:'k',x:'誰かとデュエット。ハモリ担当'},
+    {t:'h',x:'選曲リストを研究して、確実にウケる一曲を'}]},
+  {q:'修学旅行の自由行動。あなたの動きは？',a:[
+    {t:'d',x:'行き先も集合時間も、気づけば私が決めてる'},
+    {t:'h',x:'ガイドブックに付箋。ルートは頭に入ってる'},
+    {t:'m',x:'予定より「今たのしい方」に流される'},
+    {t:'k',x:'みんなが行きたい所に合わせる。それが楽しい'}]},
+  {q:'ケータイの着メロ、どう選んでた？',a:[
+    {t:'m',x:'流行りの曲をいち早く。鳴るたびちょっと自慢'},
+    {t:'k',x:'好きな人・友達ごとに曲を変えてた'},
+    {t:'h',x:'和音数とか音質とか、地味にこだわってた'},
+    {t:'d',x:'着メロより、かかってきた用件にすぐ出るタイプ'}]},
+  {q:'卒業アルバムの寄せ書き。あなたのページは？',a:[
+    {t:'k',x:'「ありがとう」「ずっと友達」で埋まってた'},
+    {t:'m',x:'内輪ネタと笑える落書きだらけ'},
+    {t:'d',x:'「頼りにしてた」「引っ張ってくれてありがとう」'},
+    {t:'h',x:'「ノート見せてくれてありがとう」多数'}]},
+  {q:'いま、あの頃の「最強」を取り戻すなら？',a:[
+    {t:'d',x:'目標を決めて、まず自分から動きたい'},
+    {t:'m',x:'ワクワクする予定を入れて、勢いをつけたい'},
+    {t:'k',x:'安心して話せる仲間と一緒に進みたい'},
+    {t:'h',x:'納得できるやり方を見つけて、着実に積み上げたい'}]}
+];
+
+// ============ タイプ定義 ============
+var TYPES={
+  d:{ name:'応援団長タイプ', en:'CAPTAIN', color:'#EC4B83', cls:'1組', club:'実行委員',
+    catch:'決めて、引っ張る。学園のエンジン',
+    ano:['体育祭も文化祭も、気づけば中心にいた','「ついていく」より「連れていく」側だった','負けず嫌い。本番に強いのが自慢だった'],
+    tsuyo:['決断力と推進力。停滞した場面を前に動かす','逆境に強く、立て直しが早い','目標が決まった瞬間の集中力'],
+    sw:'「何のためにやるのか」を自分の言葉で決めた瞬間、火がつきます。まわりに目標を宣言して、自分の背中に旗を立てるのがいちばんの近道。',
+    mawari:'全校集会と体育館イベントは最前列がおすすめ。当日を一緒に作る「文化祭実行委員」はあなたのようなタイプが主役です。ピンときたら申込時にひとこと添えてください。'},
+  m:{ name:'ムードメーカータイプ', en:'SUNSHINE', color:'#e8a13d', cls:'2組', club:'軽音部',
+    catch:'教室の太陽。笑わせた数なら負けない',
+    ano:['休み時間の中心。あなたの周りはいつも笑ってた','新しい遊び・流行りものは、だいたい言い出しっぺ','ノリと勢いで、なんとかなってた'],
+    tsuyo:['場を一気に温める力と巻き込み力','切り替えの早さ。失敗を引きずらない','はじめての場所でも友達を作れる'],
+    sw:'ワクワクする予定を先に入れてしまうこと。「楽しみ」が見えた瞬間に加速するタイプです。ひとりで頑張るより、仲間とワイワイ進む仕組みを作りましょう。',
+    mawari:'教室をハシゴして全部つまみ食いするのが正解。プリクラと購買は早め推奨。下校チャイムの大合唱では、あなたの声がまわりを巻き込みます。'},
+  k:{ name:'交換日記の番人タイプ', en:'PARTNER', color:'#3d7a5f', cls:'3組', club:'家庭科部',
+    catch:'寄り添って、支える。みんなの安心基地',
+    ano:['相談ごとは、なぜかあなたに集まってきた','交換日記もプロフ帳も、ちゃんと返す派だった','輪の真ん中じゃなくても、いないと成り立たない存在'],
+    tsuyo:['信頼される力。人の変化にいち早く気づく','聞く力と調整力。場の空気を和らげる','決めたことをコツコツ続けられる'],
+    sw:'「これは誰かのためになる」と思えた瞬間に力が出ます。がまんを抱え込まず、早めに口に出すこと。目標づくりは、ムードメーカータイプの友達と一緒にやるのがおすすめ。',
+    mawari:'交換日記コーナーとプロフ帳交換はあなたの独壇場。誰かを誘って一緒に登校すると、当日の楽しさが倍になります。同伴招待をぜひ使ってください。'},
+  h:{ name:'学級新聞 編集長タイプ', en:'EDITOR', color:'#4a6b8a', cls:'4組', club:'放送部',
+    catch:'静かに、確実に。学園の頭脳',
+    ano:['ノートの美しさと記憶力で一目置かれていた','流行に飛びつく前に、まず観察していた','好きなことへのこだわりは誰にも負けなかった'],
+    tsuyo:['正確さと計画性。任されたことの完成度','リスクに先に気づける観察眼','納得したときの集中力と持続力'],
+    sw:'「なぜこれをやるのか」のロジックが腹落ちした瞬間、自家発電で進めるようになります。判断材料（データ・理由・期限）を揃えることから始めましょう。',
+    mawari:'まず時間割を組んで、行きたい授業を予約するのがおすすめ。放送室見学と展示系の教室はあなた向き。じっくり派の回り方で、フェスを深く味わってください。'}
+};
+var ORDER=['d','m','k','h'];
+
+// ============ 状態 ============
+var ans=[]; var idx=0; var userName=''; var userMail='';
+
+function $(id){ return document.getElementById(id); }
+function show(id){ ['scrIntro','scrQ','scrR'].forEach(function(s){ $(s).classList.toggle('hide', s!==id); }); }
+
+// ============ 表紙→本体 ============
+$('btnOpen').onclick=function(){
+  try{
+    $('scrCover').style.display='none';
+    $('app').classList.remove('hide');
+  }catch(e){ dlog('open fail: '+e.message); }
+  finally{
+    // 何があっても表紙で詰まらせない保険
+    $('scrCover').style.display='none';
+    $('app').classList.remove('hide');
+  }
+  try{ window.scrollTo(0,0); }catch(e){}
+};
+
+// ============ 画面遷移 ============
+$('btnStart').onclick=function(){
+  var n=$('inName').value.trim();
+  if(!n){ $('inName').focus(); $('inName').style.borderBottomColor='#EC4B83'; return; }
+  userName=n; userMail=$('inMail').value.trim();
+  ans=[]; idx=0; renderQ(); show('scrQ');
+  try{ window.scrollTo(0,0); }catch(e){}
+};
+function renderQ(){
+  $('pNum').textContent='Q'+(idx+1)+' / '+QS.length;
+  var pct=Math.round((idx/QS.length)*100);
+  $('pPct').textContent=pct+'%';
+  $('pFill').style.width=Math.max(pct,3)+'%';
+  $('qNum').textContent='Q'+(idx+1);
+  $('qText').textContent=QS[idx].q;
+  var box=$('ansBox'); box.innerHTML='';
+  QS[idx].a.forEach(function(op){
+    var b=document.createElement('button');
+    b.className='ansbtn'; b.type='button'; b.textContent=op.x;
+    b.onclick=function(){ answer(op.t); };
+    box.appendChild(b);
+  });
+  $('btnBack').classList.toggle('hide', idx===0);
+}
+$('btnBack').onclick=function(){ if(idx>0){ idx--; ans.pop(); renderQ(); } };
+function answer(t){
+  ans[idx]=t;
+  if(idx<QS.length-1){ idx++; renderQ(); try{ window.scrollTo(0,0); }catch(e){} }
+  else{ showResult(); }
+}
+
+// ============ 判定・結果表示 ============
+function calcScores(){
+  var s={d:0,m:0,k:0,h:0};
+  ans.forEach(function(t){ if(s[t]!=null) s[t]++; });
+  return s;
+}
+function topTypes(s){
+  var mx=Math.max(s.d,s.m,s.k,s.h);
+  return ORDER.filter(function(k){ return s[k]===mx; });
+}
+var lastScores=null, lastTop=null;
+function showResult(){
+  var s=calcScores(); lastScores=s;
+  var tops=topTypes(s); lastTop=tops;
+  var main=TYPES[tops[0]];
+  $('rName').textContent=userName+' さん';
+  $('rType').textContent=tops.map(function(k){return TYPES[k].name;}).join(' × ');
+  $('rType').style.color=main.color;
+  $('rEn').textContent=tops.map(function(k){return TYPES[k].en;}).join(' / ');
+  $('rCatch').textContent=(tops.length>1?'2つの顔を持つハイブリッド｜':'')+main.catch;
+  $('rClass').textContent=main.cls;
+  $('rClub').textContent=main.club;
+  var bars=$('rBars'); bars.innerHTML='';
+  ORDER.forEach(function(k){
+    var t=TYPES[k], v=s[k], pct=Math.round((v/QS.length)*100);
+    var d=document.createElement('div'); d.className='bar';
+    d.innerHTML='<div class="bl"><span>'+t.name+'</span><span class="pts">'+v+'点</span></div>'+
+      '<div class="bg"><div class="bf" data-w="'+Math.max(pct,4)+'" style="background:'+t.color+'"></div></div>';
+    bars.appendChild(d);
+  });
+  $('rAno').innerHTML=main.ano.map(function(x){return '<li>'+x+'</li>';}).join('');
+  $('rTsuyo').innerHTML=main.tsuyo.map(function(x){return '<li>'+x+'</li>';}).join('');
+  $('rSwitch').textContent=main.sw;
+  $('rMawari').textContent=main.mawari;
+  show('scrR');
+  try{ window.scrollTo(0,0); }catch(e){}
+  setTimeout(function(){
+    var fs=bars.querySelectorAll('.bf');
+    for(var i=0;i<fs.length;i++){ fs[i].style.width=fs[i].getAttribute('data-w')+'%'; }
+  },60);
+  saveResult(s,tops,0);
+}
+
+// ============ 保存（promo_tasks 相乗り・SQLゼロ） ============
+function saveResult(s,tops,retry){
+  var st=$('saveSt');
+  if(DEMO){ st.textContent='デモモードのため記録していません'; return; }
+  st.className='savest'; st.textContent='結果を記録しています…';
+  var key='r_'+Date.now()+'_'+Math.floor(Math.random()*1000000);
+  var row={
+    run_id:RUN_ID, task_key:key, done:true,
+    owner_depts:'muteki', owner_members:userName.slice(0,40),
+    memo:JSON.stringify({v:1,name:userName,mail:userMail,
+      type:tops.map(function(k){return TYPES[k].name;}).join('・'),
+      cls:TYPES[tops[0]].cls, club:TYPES[tops[0]].club,
+      scores:s, answers:ans, ch:CH, at:new Date().toISOString(),
+      ua:navigator.userAgent.slice(0,120)}),
+    link_url:'', updated_at:new Date().toISOString()
+  };
+  fetch(SB_URL+'/rest/v1/promo_tasks',{
+    method:'POST',
+    headers:{apikey:SB_KEY,Authorization:'Bearer '+SB_KEY,'Content-Type':'application/json',Prefer:'resolution=merge-duplicates'},
+    body:JSON.stringify(row)
+  }).then(function(r){
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    st.className='savest ok'; st.textContent='結果を記録しました';
+    dlog('save ok '+key);
+  }).catch(function(e){
+    dlog('save fail: '+e.message+' retry='+retry);
+    if(retry<2){ setTimeout(function(){ saveResult(s,tops,retry+1); }, 1500*(retry+1)); return; }
+    st.className='savest ng';
+    st.textContent='通信エラーで記録できませんでした。お手数ですが、この画面のスクリーンショットを運営に送ってください（結果はこのまま使えます）。';
+  });
+}
+
+// ============ コピー・リトライ ============
+$('btnCopy').onclick=function(){
+  if(!lastScores) return;
+  var s=lastScores;
+  var txt='【無敵タイプ診断】\n'
+    +userName+'の結果：'+lastTop.map(function(k){return TYPES[k].name;}).join(' × ')+'\n'
+    +'クラス：'+TYPES[lastTop[0]].cls+'／おすすめ部活：'+TYPES[lastTop[0]].club+'\n'
+    +'団長 '+s.d+' / ムード '+s.m+' / 番人 '+s.k+' / 編集長 '+s.h+'（12点満点）\n'
+    +'診断はこちら → '+location.origin+location.pathname;
+  function done(){ $('btnCopy').textContent='コピーしました'; setTimeout(function(){ $('btnCopy').textContent='結果をコピーする（LINE用）'; },1600); }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(txt).then(done).catch(function(){ legacyCopy(txt); done(); });
+  }else{ legacyCopy(txt); done(); }
+};
+function legacyCopy(t){
+  var ta=document.createElement('textarea'); ta.value=t;
+  ta.style.position='fixed'; ta.style.top='0'; ta.style.left='0'; ta.style.opacity='0';
+  document.body.appendChild(ta); ta.focus(); ta.select();
+  try{ document.execCommand('copy'); }catch(e){}
+  document.body.removeChild(ta);
+}
+$('btnRetry').onclick=function(){
+  ans=[]; idx=0; lastScores=null; lastTop=null;
+  $('saveSt').className='savest'; $('saveSt').textContent='結果を記録しています…';
+  show('scrIntro'); try{ window.scrollTo(0,0); }catch(e){}
+};
+
+// ============ 不具合報告（ailab_notes 相乗り） ============
+(function(){
+  var M=$('bugM');
+  $('bugL').onclick=function(){ M.classList.add('on'); };
+  $('bugC').onclick=function(){ M.classList.remove('on'); $('bugD').style.display='none'; };
+  $('bugS').onclick=function(){
+    var t=$('bugT').value.trim();
+    if(!t){ $('bugT').focus(); return; }
+    var btn=this; btn.disabled=true;
+    function done(){
+      $('bugD').style.display='block'; $('bugT').value=''; btn.disabled=false;
+      setTimeout(function(){ M.classList.remove('on'); $('bugD').style.display='none'; },1800);
+    }
+    if(DEMO){ done(); return; }
+    fetch(SB_URL+'/rest/v1/ailab_notes',{
+      method:'POST',
+      headers:{apikey:SB_KEY,Authorization:'Bearer '+SB_KEY,'Content-Type':'application/json'},
+      body:JSON.stringify({member_id:'bug_seito-techo',member_name:'生徒手帳｜'+(userName||'guest'),
+        mood:'バグ報告',worry:t,
+        want:location.href.slice(0,180)+' ／ '+navigator.userAgent.slice(0,140)})
+    }).then(function(){ done(); }).catch(function(){ btn.disabled=false; alert('送信できませんでした。通信環境をご確認ください。'); });
+  };
+})();
+
+// ============ 動作確認用オートラン（?auto=1） ============
+if(AUTO){
+  try{
+    $('scrCover').style.display='none';
+    $('app').classList.remove('hide');
+    userName='動作確認テスト'; userMail='';
+    ans=[]; for(var i=0;i<QS.length;i++){ ans.push(i<6?'d':ORDER[i%4]); }
+    idx=QS.length-1;
+    showResult();
+    dlog('auto-run done');
+  }catch(e){ dlog('auto-run fail: '+e.message); }
+}
+})();
+</script>
+</body>
+</html>
