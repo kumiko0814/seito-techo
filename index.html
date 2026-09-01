@@ -405,7 +405,7 @@ footer{max-width:560px;margin:0 auto;padding:8px 16px 30px;text-align:center;fon
       <div class="hsub">交換したともだちが、ここにたまっていきます</div>
     </div>
     <div id="friendList"></div>
-    <div class="empty hide" id="friendEmpty">まだ0人です。<br>プロフ帳を作って、QRかリンクで交換してみてください。ともだちのQRを読み取ると、ここに保存されます。</div>
+    <div class="empty hide" id="friendEmpty">まだ0人です。<br>プロフ帳を保存すると、あなた専用のQRとリンクができます。それをともだちに見せる・送ると、おたがいのともだち帳にたまっていきます。<button class="btn kawaii sm" id="btnEmptyMake" style="margin-top:14px;">♡ プロフ帳を作る ♡</button></div>
   </section>
 
   <!-- ◆ 共有ビュー（?p=xxx） -->
@@ -420,7 +420,7 @@ footer{max-width:560px;margin:0 auto;padding:8px 16px 30px;text-align:center;fon
   </section>
 
 </div>
-<footer>放課後最強フェス「生徒手帳」 v20260901a</footer>
+<footer>放課後最強フェス「生徒手帳」 v20260901b</footer>
 </div>
 
 <!-- タブバー -->
@@ -447,7 +447,7 @@ footer{max-width:560px;margin:0 auto;padding:8px 16px 30px;text-align:center;fon
 <script>
 (function(){
 "use strict";
-var VER='20260901a';
+var VER='20260901b';
 var SB_URL='https://inrvprlyobghviklulcv.supabase.co';
 var SB_KEY='sb_publishable_ZrCNcsRHMci-l7Fns8QtIA_X22XZGJp';
 var P; try{ P=new URLSearchParams(location.search); }catch(e){ P={get:function(){return null;}}; }
@@ -482,6 +482,7 @@ function go(pg){
   for(var i=0;i<tb.length;i++){ tb[i].classList.toggle('on', tb[i].getAttribute('data-pg')===pg); }
   if(pg==='pgId') renderId();
   if(pg==='pgFriend') renderFriends();
+  if(pg==='pgProf') initProfTab();
   try{ window.scrollTo(0,0); }catch(e){}
 }
 (function(){
@@ -988,6 +989,23 @@ $('btnBackForm').onclick=function(){
   fillForm();
   try{ window.scrollTo(0,0); }catch(e){}
 };
+/* プロフ帳タブを開いた時：保存済みなら最初からデコ画面＋QRを見せる */
+function initProfTab(){
+  try{
+    if(profKey && prof.f && prof.f.nm){
+      $('profForm').classList.add('hide');
+      $('profDeco').classList.remove('hide');
+      renderDecoAll(); renderStkRow();
+      showShare();
+      $('profSt').className='savest ok';
+      $('profSt').textContent='保存済みです。下のQRとリンクで交換できます';
+    }else{
+      $('profDeco').classList.add('hide');
+      $('profForm').classList.remove('hide');
+      fillForm();
+    }
+  }catch(e){ dlog('initProfTab fail: '+e.message); }
+}
 /* QA専用（?sample=1のみ・画面にボタンなし・保存不可） */
 function loadSample(){
   prof={v:1,f:{nm:'みちこ',aka:'みっちー',area:'世田谷',job:'販売のおしごと',type:'ムードメーカータイプ',mbti:'ENFP',charm:'えくぼ',
@@ -1119,6 +1137,7 @@ $('btnAddFriend').onclick=function(){
   $('shareSt').textContent=exists?'すでに、ともだち帳にいます':'ともだち帳にのこしました';
 };
 $('btnMakeMine').onclick=function(){ go('pgProf'); };
+$('btnEmptyMake').onclick=function(){ go('pgProf'); };
 function renderFriends(){
   var list=load('st_friends',true)||[];
   var box=$('friendList'); box.innerHTML='';
