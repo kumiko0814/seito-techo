@@ -7,7 +7,7 @@
 <title>生徒手帳｜放課後最強フェス</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Klee+One:wght@400;600&family=Yomogi&family=Mochiy+Pop+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Klee+One:wght@400;600&family=Yomogi&family=Mochiy+Pop+One&family=Shippori+Mincho:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 html,body{height:100%;}
@@ -202,6 +202,95 @@ footer{max-width:560px;margin:0 auto;padding:8px 16px 30px;text-align:center;fon
 #dbg{display:none;position:fixed;left:0;right:0;bottom:0;max-height:32vh;overflow:auto;background:rgba(34,84,67,.94);
   color:#e6f2e6;font-size:11px;font-family:Menlo,monospace;padding:8px 10px;z-index:99999;white-space:pre-wrap;}
 @media (max-width:380px){ .qtext{font-size:16px;} .cover h1{font-size:29px;} .pf-grid{gap:6px;} }
+
+/* ===== 手帳デザイン2026-09（モック準拠の上書き） ===== */
+body{background:#f6eee1;font-family:'Shippori Mincho','Hiragino Mincho ProN','Yu Mincho',serif;color:#3a3934;}
+#app{background:#f6eee1;background-image:none;}
+#hbHead{display:flex;align-items:center;justify-content:center;gap:14px;padding:16px 0 2px;}
+#hbHead .crest{width:54px;height:auto;mix-blend-mode:multiply;}
+#hbHead .t1{font-size:29px;letter-spacing:.32em;color:#273a5a;font-weight:600;line-height:1.2;}
+#hbHead .t2{font-size:9.5px;letter-spacing:.42em;color:#8a7c66;margin-top:2px;}
+#hbPill{width:max-content;margin:8px auto 2px;border:1px solid #cbbb97;padding:2.5px 20px;font-size:11px;letter-spacing:.28em;color:#6b5f4e;background:#fbf5ea;}
+#sideTabs{position:fixed;top:128px;right:max(0px,calc(50% - 297px));width:34px;z-index:4;pointer-events:none;mix-blend-mode:multiply;}
+.head .tag{display:none;}
+.head h2{font-family:inherit;color:#273a5a;font-size:20px;letter-spacing:.1em;}
+.head .hsub{color:#9b8d78;}
+.card{background:#fdf9f1;border:1px solid #e5d9c6;border-radius:14px;box-shadow:0 8px 20px rgba(80,60,30,.08);}
+label{color:#273a5a;font-weight:600;letter-spacing:.05em;}
+label .req{color:#d4638c;background:none;}
+label .opt{color:#a99a83;}
+input[type=text],input[type=email]{border-bottom:1.5px solid #d8cbb5;font-family:'Shippori Mincho','Hiragino Mincho ProN',serif;}
+input:focus{border-bottom-color:#d4638c;}
+.sec h3{font-family:inherit;color:#d4638c;font-weight:600;letter-spacing:.12em;border-bottom:1px solid #e9b7c9;padding-bottom:6px;}
+.sec li:before{color:#d4638c;}
+.note{color:#a99a83;}
+.hbcard{background:#fdf9f1;border:1px solid #e0d3bd;border-radius:14px;overflow:hidden;margin-top:16px;box-shadow:0 10px 24px rgba(80,60,30,.10);}
+.hbcard-h{background:#273a5a;color:#f2e9d6;display:flex;align-items:center;gap:10px;padding:9px 14px;}
+.hbcard-h .mini{width:22px;height:22px;border-radius:3px;}
+.hbcard-h .jt{font-size:15px;letter-spacing:.35em;font-weight:600;}
+.hbcard-h .en{margin-left:auto;font-size:9px;letter-spacing:.3em;color:#c8b078;}
+.hbcard-b{padding:18px 16px 14px;}
+.idrowA{display:flex;gap:16px;}
+.photoBox{width:112px;min-height:148px;flex:none;border:1.5px dashed #c4b295;border-radius:8px;background:#faf4e8;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;cursor:pointer;overflow:hidden;text-align:center;}
+.photoBox .ph-t{font-size:10.5px;color:#8a7c66;line-height:1.8;letter-spacing:.06em;}
+.photoBox img{width:100%;height:148px;object-fit:cover;}
+.idInfo{flex:1;min-width:0;padding-top:4px;}
+.lblA{font-size:10.5px;color:#9b8d78;letter-spacing:.18em;}
+.valA{font-size:15.5px;color:#273a5a;font-weight:600;margin-top:3px;line-height:1.6;}
+.hrA{border-top:1px solid #e5d9c6;margin:13px 0;}
+.id3col{display:flex;margin-top:18px;border-top:1px solid #e5d9c6;padding-top:14px;text-align:center;}
+.id3col>div{flex:1;position:relative;}
+.id3col>div+div{border-left:1px solid #e5d9c6;}
+.bigA{font-size:19px;color:#273a5a;font-weight:700;margin-top:4px;letter-spacing:.05em;}
+.idfootA{display:flex;align-items:flex-end;justify-content:space-between;margin-top:16px;border-top:1px solid #e5d9c6;padding-top:12px;}
+.idfootA .dates{font-size:11.5px;color:#5d5344;line-height:2;letter-spacing:.04em;}
+.sealimg{width:44px;height:auto;mix-blend-mode:multiply;}
+.hbbtn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;border:none;border-radius:12px;
+  padding:16px;margin-top:14px;font-size:15px;font-weight:600;letter-spacing:.1em;cursor:pointer;
+  font-family:'Shippori Mincho','Hiragino Mincho ProN',serif;color:#fff;box-shadow:0 6px 14px rgba(60,45,25,.18);}
+.hbbtn:active{transform:translateY(2px);box-shadow:0 2px 6px rgba(60,45,25,.18);}
+.hbbtn.navyB{background:#273a5a;}
+.hbbtn.pinkB{background:#d4638c;}
+.btn{background:#d4638c;box-shadow:0 5px 0 #b04a70;font-family:'Shippori Mincho','Hiragino Mincho ProN',serif;}
+.btn:active{box-shadow:0 2px 0 #b04a70;}
+.btn.navy{background:#273a5a;box-shadow:0 5px 0 #16243c;}
+.btn.gray{background:#ece2d2;color:#5d5344;box-shadow:0 5px 0 #cfc2ab;}
+.pfheadA{display:flex;align-items:flex-start;gap:10px;}
+.pfttl{font-size:21px;color:#273a5a;letter-spacing:.14em;font-weight:600;}
+.pfsubA{font-size:12px;color:#9b8d78;margin-top:6px;letter-spacing:.08em;}
+.stampimg{width:76px;height:auto;margin-left:auto;flex:none;transform:rotate(6deg);mix-blend-mode:multiply;}
+.qnum{background:#273a5a;border-radius:3px;font-family:inherit;}
+.qtext{color:#273a5a;}
+.ansbtn{background:#fffdf8;border:1px solid #ddd0ba;border-radius:10px;color:#3a3934;font-family:inherit;}
+.ansbtn:active{background:#f8ecf1;border-color:#d4638c;}
+.prog .pf{background:linear-gradient(90deg,#d4638c,#e59ab4);}
+.prog .pb{background:#efe6d6;border-color:#e0d3bd;}
+.marker{background:linear-gradient(transparent 60%, #f3dc9a 60%, #f3dc9a 92%, transparent 92%);}
+.rbig{color:#273a5a;}
+.idrow .idbox{border-color:#d8cbb5;}
+.idbox .k{color:#9b8d78;}
+.idbox .v{color:#273a5a;}
+.rulecard{border:1px solid #e0d3bd;border-radius:14px;background:#fdf9f1;box-shadow:0 8px 20px rgba(80,60,30,.08);}
+.rulecard .rhead{background:#273a5a;letter-spacing:.5em;font-size:14px;}
+.rulecard li{border-bottom:1px dashed #ddd0ba;font-family:inherit;}
+.rulecard li b{color:#273a5a;letter-spacing:.2em;}
+.rulecard .rfoot{color:#9b8d78;}
+.friend{background:#fdf9f1;border:1px solid #e0d3bd;border-radius:12px;}
+.friend .fn{color:#273a5a;font-family:inherit;}
+.friend .go{color:#d4638c;}
+.empty{background:#fdf9f1;border:1.5px dashed #ccbc9f;color:#8a7c66;border-radius:12px;}
+#tabbar{background:#273a5a;border-top:1px solid #c8b078;}
+#tabbar button{color:#cfd6e2;font-family:'Shippori Mincho','Hiragino Mincho ProN',serif;border-radius:8px;}
+#tabbar button.on{background:#f9d179;color:#273a5a;}
+#bugL{background:#fdf9f1;border:1px solid #d8cbb5;color:#8a7c66;font-family:inherit;}
+.savest{font-family:inherit;}
+.savest.ok{color:#4d7a5a;}
+.savest.ng{color:#c05577;background:#f8e9ef;}
+footer{color:#b3a68e;}
+#stgBadge{position:fixed;left:10px;bottom:calc(74px + env(safe-area-inset-bottom));z-index:9500;
+  background:#8a2e2e;color:#fff;font-size:10.5px;letter-spacing:.2em;padding:5px 12px;border-radius:999px;opacity:.92;}
+@media (max-width:620px){ #sideTabs{right:-6px;} }
 </style>
 </head>
 <body>
@@ -213,40 +302,42 @@ footer{max-width:560px;margin:0 auto;padding:8px 16px 30px;text-align:center;fon
 </div>
 
 <!-- ===== 本体 ===== -->
-<div id="app" class="paper hide">
+<div id="app" class="hide">
 <div id="shareTop" class="hide">ともだちのプロフ帳が届きました</div>
+<img id="sideTabs" src="hb_sidetabs.png" alt="">
 <div class="wrap">
+  <div id="hbHead">
+    <img class="crest" src="hb_crest.png" alt="">
+    <div class="t"><div class="t1">生徒手帳</div><div class="t2">STUDENT HANDBOOK</div></div>
+  </div>
+  <div id="hbPill">放課後最強フェス 学園</div>
 
   <!-- ◆ 学生証 -->
   <section id="pgId">
-    <div class="head">
-      <span class="tag">学生証</span>
-      <h2>デジタル学生証</h2>
-      <div class="hsub">あなたの身分証明書｜写真をタップして登録できます</div>
-    </div>
-    <div class="idcard stamp">
-      <div class="ihead">身分証明書｜放課後最強学園</div>
-      <div class="ibody">
-        <div class="idflex">
-          <div class="idphoto" id="idPhoto">写真を<br>はる</div>
-          <div class="idmeta">
-            <div class="k">なまえ</div><div class="v" id="idName">未登録（タップで入力）</div>
-            <div class="k">無敵タイプ</div><div class="v" id="idType">診断で判明します</div>
+    <div class="hbcard">
+      <div class="hbcard-h"><img class="mini" src="hb_crest_mini.png" alt=""><span class="jt">身分証明書</span><span class="en">IDENTITY CARD</span></div>
+      <div class="hbcard-b">
+        <div class="idrowA">
+          <div class="photoBox" id="idPhoto"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#8a7c66" stroke-width="1.4"><rect x="3" y="7" width="18" height="13" rx="2.5"/><circle cx="12" cy="13.2" r="3.6"/><path d="M8.5 7l1.4-2.4h4.2L15.5 7"/></svg><div class="ph-t">写真を設定する<br>タップして登録</div></div>
+          <div class="idInfo">
+            <div class="lblA">なまえ</div><div class="valA" id="idName">未登録（診断で登録されます）</div>
+            <div class="hrA"></div>
+            <div class="lblA">無敵タイプ</div><div class="valA" id="idType">診断で判明します</div>
           </div>
         </div>
-        <div class="idrow">
-          <div class="idbox"><div class="k">クラス</div><div class="v" id="idCls">−</div></div>
-          <div class="idbox"><div class="k">部活</div><div class="v" id="idClub">−</div></div>
-          <div class="idbox"><div class="k">出席番号</div><div class="v" id="idNo">−</div></div>
+        <div class="id3col">
+          <div><div class="lblA">クラス</div><div class="bigA" id="idCls">−</div></div>
+          <div><div class="lblA">部活</div><div class="bigA" id="idClub">−</div></div>
+          <div><div class="lblA">出席番号</div><div class="bigA" id="idNo">−</div></div>
         </div>
-        <div class="idfoot">
-          <div class="no">発行日 <span id="idDate"></span><br>2026.11 放課後最強フェスにて有効</div>
-          <div class="idcrest">最</div>
+        <div class="idfootA">
+          <div class="dates">発行日：<span id="idDate"></span><br>有効期限：2026.11 放課後最強フェスにて有効</div>
+          <img class="sealimg" src="hb_seal.png" alt="">
         </div>
       </div>
     </div>
-    <button class="btn navy sm" id="btnGoShindan">無敵タイプ診断を受ける（約1分）</button>
-    <button class="btn sm" id="btnGoProf">プロフ帳を作る・デコる</button>
+    <button class="hbbtn navyB" id="btnGoShindan"><svg viewBox="0 0 24 24" width="19" height="19" fill="#e9c25f"><path d="M2 21l21-9L2 3l4 8 11 1-11 1z"/></svg>無敵タイプ診断を受ける（約1分）</button>
+    <button class="hbbtn pinkB" id="btnGoProf"><svg viewBox="0 0 24 24" width="18" height="18" fill="#fff"><path d="M3 17.2V21h3.8L18 9.8l-3.8-3.8L3 17.2zM20.7 7.1a1 1 0 000-1.4l-2.4-2.4a1 1 0 00-1.4 0l-1.8 1.8 3.8 3.8 1.8-1.8z"/></svg>プロフ帳を作る・デコる</button>
     <input type="file" id="photoFile" accept="image/*" class="hide">
   </section>
 
@@ -303,15 +394,13 @@ footer{max-width:560px;margin:0 auto;padding:8px 16px 30px;text-align:center;fon
 
   <!-- ◆ プロフ帳 -->
   <section id="pgProf" class="hide">
-    <div class="head">
-      <span class="tag">プロフ帳</span>
-      <h2>マイ・プロフ帳</h2>
-      <div class="hsub">書いて、デコって、ともだちと交換しよう</div>
-    </div>
-
     <!-- 入力フォーム -->
     <div class="card" id="profForm">
-      <p style="font-size:13.5px;color:#a08d7d;">ぜんぶ書かなくてOK。書いた項目だけプロフ帳に載ります。</p>
+      <div class="pfheadA">
+        <div><h2 class="pfttl">マイ・プロフ帳</h2><div class="pfsubA">書いて、デコって、ともだちと交換しよう</div></div>
+        <img class="stampimg" src="hb_stamp.png" alt="">
+      </div>
+      <p style="font-size:13px;color:#9b8d78;margin-top:10px;">ぜんぶ書かなくてOK。書いた項目だけプロフ帳に載ります。</p>
       <div class="sec"><h3>My Profile</h3></div>
       <label>名前<span class="req">必須</span></label><input type="text" id="f_nm" maxlength="20" placeholder="例）くみこ">
       <label>a.k.a（あだ名）</label><input type="text" id="f_aka" maxlength="20" placeholder="例）くみっち">
@@ -420,7 +509,7 @@ footer{max-width:560px;margin:0 auto;padding:8px 16px 30px;text-align:center;fon
   </section>
 
 </div>
-<footer>放課後最強フェス「生徒手帳」 v20260901b</footer>
+<footer>放課後最強フェス「生徒手帳」 v20260901c</footer>
 </div>
 
 <!-- タブバー -->
@@ -447,12 +536,16 @@ footer{max-width:560px;margin:0 auto;padding:8px 16px 30px;text-align:center;fon
 <script>
 (function(){
 "use strict";
-var VER='20260901b';
+var VER='20260901c';
 var SB_URL='https://inrvprlyobghviklulcv.supabase.co';
 var SB_KEY='sb_publishable_ZrCNcsRHMci-l7Fns8QtIA_X22XZGJp';
 var P; try{ P=new URLSearchParams(location.search); }catch(e){ P={get:function(){return null;}}; }
 var CH=String(P.get('ch')||'fes').toLowerCase().replace(/[^a-z0-9_\-]/g,'')||'fes';
-var RUN_ID='muteki-'+CH;
+var STG=location.pathname.indexOf('seito-techo-stg')>-1;
+var RUN_ID=(STG?'stg-muteki-':'muteki-')+CH;
+var PROF_RUN=STG?'profcho-stg':'profcho';
+var BUG_ID=STG?'bug_seito-techo-stg':'bug_seito-techo';
+if(STG){ try{ var sb=document.createElement('div'); sb.id='stgBadge'; sb.textContent='検証用（本番データには影響しません）'; document.body.appendChild(sb); }catch(e){} }
 var DEMO=P.get('demo')==='1';
 var DEBUG=P.get('debug')==='1';
 var AUTO=P.get('auto')==='1';
@@ -1052,12 +1145,12 @@ function saveProf(retry){
     return fetch(SB_URL+'/rest/v1/promo_tasks',{
       method:'POST',
       headers:{apikey:SB_KEY,Authorization:'Bearer '+SB_KEY,'Content-Type':'application/json',Prefer:'resolution=merge-duplicates'},
-      body:JSON.stringify({run_id:'profcho',task_key:profKey,done:true,owner_depts:'profcho',
+      body:JSON.stringify({run_id:PROF_RUN,task_key:profKey,done:true,owner_depts:'profcho',
         owner_members:(prof.f.nm||'').slice(0,40),memo:memo,link_url:'',updated_at:new Date().toISOString()})
     });
   };
   var doPatch=function(){
-    return fetch(SB_URL+'/rest/v1/promo_tasks?run_id=eq.profcho&task_key=eq.'+encodeURIComponent(profKey),{
+    return fetch(SB_URL+'/rest/v1/promo_tasks?run_id=eq.'+PROF_RUN+'&task_key=eq.'+encodeURIComponent(profKey),{
       method:'PATCH',
       headers:{apikey:SB_KEY,Authorization:'Bearer '+SB_KEY,'Content-Type':'application/json',Prefer:'return=representation'},
       body:JSON.stringify({memo:memo,owner_members:(prof.f.nm||'').slice(0,40),updated_at:new Date().toISOString()})
@@ -1108,7 +1201,7 @@ $('btnLine').onclick=function(){
 function loadShared(key){
   $('shareTop').classList.remove('hide');
   $('shareSt').className='savest'; $('shareSt').textContent='読み込んでいます…';
-  fetch(SB_URL+'/rest/v1/promo_tasks?run_id=eq.profcho&task_key=eq.'+encodeURIComponent(key)+'&select=memo',{
+  fetch(SB_URL+'/rest/v1/promo_tasks?run_id=eq.'+PROF_RUN+'&task_key=eq.'+encodeURIComponent(key)+'&select=memo',{
     headers:{apikey:SB_KEY,Authorization:'Bearer '+SB_KEY}
   }).then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
   .then(function(rows){
@@ -1193,7 +1286,7 @@ $('ruleList').innerHTML=RULES.map(function(r){ return '<li><b>'+r[0]+'</b>'+r[1]
     fetch(SB_URL+'/rest/v1/ailab_notes',{
       method:'POST',
       headers:{apikey:SB_KEY,Authorization:'Bearer '+SB_KEY,'Content-Type':'application/json'},
-      body:JSON.stringify({member_id:'bug_seito-techo',member_name:'生徒手帳｜'+(load('st_name')||'guest'),
+      body:JSON.stringify({member_id:BUG_ID,member_name:'生徒手帳｜'+(load('st_name')||'guest'),
         mood:'バグ報告',worry:t,
         want:location.href.slice(0,180)+' ／ '+navigator.userAgent.slice(0,140)})
     }).then(function(){ done(); }).catch(function(){ btn.disabled=false; alert('送信できませんでした。通信環境をご確認ください。'); });
