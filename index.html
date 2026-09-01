@@ -180,6 +180,7 @@ input:focus,textarea.tx:focus{border-bottom-color:#EC4B83;}
 .friend .fn{font-size:15.5px;font-weight:600;color:#1d3a4f;}
 .friend .ft{font-size:11.5px;color:#a08d7d;}
 .friend .go{margin-left:auto;color:#EC4B83;font-size:12px;font-weight:600;flex:none;}
+.friend .fx{flex:none;color:#b3a294;font-size:15px;padding:4px 2px 4px 8px;}
 .empty{font-size:13.5px;color:#a08d7d;background:#fff;border:1.5px dashed #d9c6b5;border-radius:14px;padding:18px;margin-top:14px;line-height:2;}
 footer{max-width:560px;margin:0 auto;padding:8px 16px 30px;text-align:center;font-size:11px;color:#b3a294;}
 /* 共有ビュー */
@@ -344,7 +345,7 @@ footer{max-width:560px;margin:0 auto;padding:8px 16px 30px;text-align:center;fon
       <label>こんな人、声かけて！</label><input type="text" id="f_koe" maxlength="40" placeholder="例）同世代ママ・NANA好き・世田谷の人">
       <label>ひとこと</label><input type="text" id="f_msg" maxlength="40" placeholder="例）なかよくしてね">
       <button class="btn kawaii" id="btnToDeco">♡ プロフ帳にする → デコる ♡</button>
-      <button class="btn gray sm" id="btnSample">見本を見る</button>
+      <button class="btn gray sm" id="btnClearForm">入力内容をぜんぶ消す</button>
     </div>
 
     <!-- デコエディタ -->
@@ -419,7 +420,7 @@ footer{max-width:560px;margin:0 auto;padding:8px 16px 30px;text-align:center;fon
   </section>
 
 </div>
-<footer>放課後最強フェス「生徒手帳」 v20260831k</footer>
+<footer>放課後最強フェス「生徒手帳」 v20260901a</footer>
 </div>
 
 <!-- タブバー -->
@@ -446,7 +447,7 @@ footer{max-width:560px;margin:0 auto;padding:8px 16px 30px;text-align:center;fon
 <script>
 (function(){
 "use strict";
-var VER='20260831k';
+var VER='20260901a';
 var SB_URL='https://inrvprlyobghviklulcv.supabase.co';
 var SB_KEY='sb_publishable_ZrCNcsRHMci-l7Fns8QtIA_X22XZGJp';
 var P; try{ P=new URLSearchParams(location.search); }catch(e){ P={get:function(){return null;}}; }
@@ -987,13 +988,14 @@ $('btnBackForm').onclick=function(){
   fillForm();
   try{ window.scrollTo(0,0); }catch(e){}
 };
-$('btnSample').onclick=function(){
+/* QA専用（?sample=1のみ・画面にボタンなし・保存不可） */
+function loadSample(){
   prof={v:1,f:{nm:'みちこ',aka:'みっちー',area:'世田谷',job:'販売のおしごと',type:'ムードメーカータイプ',mbti:'ENFP',charm:'えくぼ',
     motto:'笑う門には福来る',dream:'お花屋さん',tokugi:'一輪車とあやとり',hobby:'カフェ巡り',hamari:'推し活とフリマ出品',holiday:'子どもと公園→夜はドラマ',
     oshi:'2000年代の青春パンク',drama:'ごくせん',anime:'NANA・GALS!',song:'2003年の名バラード',food:'いちご大福',drink:'タピオカ',
     after:'ゲーセン→プリ帳交換',item:'カラーペン10色',year:'2003年（高2の夏）',want:'自分だけの時間',fes:'制服でプリクラ！',yaritai:'プリクラ→フリマ巡り',
     koe:'同世代ママさん・NANA好きさん、話しましょ！',msg:'なかよくしてね'},
-    deco:{bg:'pool',stk:[
+    deco:{stk:[
       {id:'sm1',t:'heartP',x:60,y:3,r:-14,sc:.9},{id:'sm2',t:'star',x:5.5,y:42,r:12,sc:.85},
       {id:'sm3',t:'hibiscus',x:94.5,y:33,r:8,sc:.9},{id:'sm4',t:'dolphin',x:5.5,y:69,r:-10,sc:.95},
       {id:'sm5',t:'kira',x:94.5,y:55,r:0,sc:.65},{id:'sm6',t:'txtBff',x:66,y:97.5,r:-8,sc:1},
@@ -1001,7 +1003,15 @@ $('btnSample').onclick=function(){
   $('profForm').classList.add('hide');
   $('profDeco').classList.remove('hide');
   renderDecoAll(); renderStkRow();
-  $('profSt').className='savest'; $('profSt').textContent='見本です。「← 内容を書き直す」から自分の内容にできます';
+  $('profSt').className='savest'; $('profSt').textContent='QA用の見本表示です（保存されません）';
+  try{ window.scrollTo(0,0); }catch(e){}
+}
+$('btnClearForm').onclick=function(){
+  if(!window.confirm('プロフ帳の入力内容とシールをぜんぶ消します。よろしいですか？（写真と交換リンクは残ります）')) return;
+  prof={v:1,f:{},deco:{stk:[]}};
+  try{ localStorage.removeItem('st_prof'); }catch(e){}
+  fillForm();
+  $('profSt').className='savest'; $('profSt').textContent='';
   try{ window.scrollTo(0,0); }catch(e){}
 };
 
@@ -1013,6 +1023,7 @@ function profPayload(){
 $('btnSaveProf').onclick=function(){ saveProf(0); };
 function saveProf(retry){
   var st=$('profSt');
+  if(P.get('sample')==='1'){ st.className='savest'; st.textContent='QA用見本モードのため保存されません'; return; }
   store('st_prof',prof);
   if(DEMO){ st.className='savest ok'; st.textContent='デモモードのため端末にだけ保存しました'; return; }
   st.className='savest'; st.textContent='保存しています…';
@@ -1116,8 +1127,14 @@ function renderFriends(){
     var d=document.createElement('div'); d.className='friend';
     d.innerHTML='<div class="fav">'+(fr.photo?'<img alt="" src="'+fr.photo+'">':esc((fr.name||'友')[0]))+'</div>'
       +'<div><div class="fn">'+esc(fr.name)+'</div><div class="ft">'+esc(fr.type||'')+'</div></div>'
-      +'<div class="go">プロフ帳を見る →</div>';
+      +'<div class="go">プロフ帳を見る →</div><div class="fx" title="ともだち帳から消す">✕</div>';
     d.onclick=function(){ go('pgShare'); loadShared(fr.k); };
+    d.querySelector('.fx').onclick=function(ev){
+      ev.stopPropagation();
+      if(!window.confirm(esc(fr.name)+' さんをともだち帳から消しますか？')) return;
+      var l2=(load('st_friends',true)||[]).filter(function(x){ return x.k!==fr.k; });
+      store('st_friends',l2); renderFriends();
+    };
     box.appendChild(d);
   });
 }
@@ -1181,7 +1198,7 @@ try{
     dlog('auto-run done');
   }else if(P.get('sample')==='1'){
     openApp('pgProf');
-    $('btnSample').click();
+    loadSample();
   }else if(TABP && document.getElementById(TABP)){
     openApp(TABP);
   }
